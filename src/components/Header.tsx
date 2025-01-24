@@ -9,41 +9,28 @@ export default function Header() {
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null)
 
   const citizenshipMenuItems = [
-    { name: 'Antigua & Barbuda', href: '/vatandaslik/antigua-barbuda' },
-    { name: 'Dominica', href: '/vatandaslik/dominica' },
-    { name: 'Grenada', href: '/vatandaslik/grenada' },
-    { name: 'Malta', href: '/vatandaslik/malta' },
-    { name: 'Montenegro', href: '/vatandaslik/montenegro' },
-    { name: 'North Macedonia', href: '/vatandaslik/north-macedonia' },
-    { name: 'Saint Lucia', href: '/vatandaslik/saint-lucia' },
-    { name: 'St. Kitts & Nevis', href: '/vatandaslik/st-kitts-nevis' },
-    { name: 'Türkiye', href: '/vatandaslik/turkiye' },
-    { name: 'Vanuatu', href: '/vatandaslik/vanuatu' },
+    { name: 'Türk Vatandaşlığı', href: '/vatandaslik/turk-vatandasligi' },
+    { name: 'İkamet İzni', href: '/vatandaslik/ikamet-izni' },
+    { name: 'Çalışma İzni', href: '/vatandaslik/calisma-izni' },
+    { name: 'Mavi Kart', href: '/vatandaslik/mavi-kart' }
   ]
 
   const legalMenuItems = [
-    { name: 'Corporate / M&A', href: '/hukuk/corporate-ma' },
-    { name: 'Commercial Law', href: '/hukuk/commercial-law' },
-    { name: 'Company Formation', href: '/hukuk/company-formation' },
-    { name: 'Employment Law', href: '/hukuk/employment-law' },
-    { name: 'Private Equity', href: '/hukuk/private-equity' },
-    { name: 'Construction Law', href: '/hukuk/construction-law' },
-    { name: 'Property & Real Estate Law', href: '/hukuk/real-estate-law' },
-    { name: 'Transportation and Logistics', href: '/hukuk/transportation-logistics' },
+    { name: 'Gayrimenkul Hukuku', href: '/hukuk/gayrimenkul' },
+    { name: 'Şirketler Hukuku', href: '/hukuk/sirketler' },
+    { name: 'Ticaret Hukuku', href: '/hukuk/ticaret' },
+    { name: 'İş Hukuku', href: '/hukuk/is-hukuku' }
   ]
 
   const menuItems = [
-    { name: 'Anasayfa', href: '/' },
     { name: 'Hakkımızda', href: '/hakkimizda' },
     { 
       name: 'Vatandaşlık ve Oturum İzni', 
-      href: '/vatandaslik-ve-oturum-izni',
       megaMenu: 'citizenship',
       image: '/images/vatandaslik.jpg'
     },
     { 
       name: 'Hukuk', 
-      href: '/hukuk',
       megaMenu: 'legal',
       image: '/images/hukuk.png'
     },
@@ -77,12 +64,18 @@ export default function Header() {
                 onMouseEnter={() => item.megaMenu && handleMouseEnter(item.megaMenu)}
                 onMouseLeave={handleMouseLeave}
               >
-                <Link
-                  href={item.href}
-                  className="text-gray-600 hover:text-gray-900 transition-colors font-medium py-8"
-                >
-                  {item.name}
-                </Link>
+                {item.href ? (
+                  <Link
+                    href={item.href}
+                    className="text-gray-600 hover:text-gray-900 transition-colors font-medium py-8"
+                  >
+                    {item.name}
+                  </Link>
+                ) : (
+                  <span className="text-gray-600 hover:text-gray-900 transition-colors font-medium py-8 cursor-default">
+                    {item.name}
+                  </span>
+                )}
 
                 {/* Mega Menu */}
                 {item.megaMenu && activeMegaMenu === item.megaMenu && (
@@ -105,13 +98,12 @@ export default function Header() {
                         <div className="col-span-2">
                           <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                             {(item.megaMenu === 'citizenship' ? citizenshipMenuItems : legalMenuItems).map((subItem) => (
-                              <Link
+                              <div
                                 key={subItem.name}
-                                href={subItem.href}
-                                className="text-white hover:text-gray-300 transition-colors text-sm"
+                                className="text-white hover:text-gray-300 transition-colors text-sm cursor-default"
                               >
                                 {subItem.name}
-                              </Link>
+                              </div>
                             ))}
                           </div>
                         </div>
@@ -196,14 +188,33 @@ export default function Header() {
           <div className="lg:hidden py-4">
             <div className="flex flex-col space-y-4">
               {menuItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="text-gray-600 hover:text-gray-900 transition-colors"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </Link>
+                <div key={item.name}>
+                  {item.href ? (
+                    <Link
+                      href={item.href}
+                      className="text-gray-600 hover:text-gray-900 transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  ) : (
+                    <span className="text-gray-600 cursor-default">
+                      {item.name}
+                    </span>
+                  )}
+                  {item.megaMenu && (
+                    <div className="ml-4 mt-2 space-y-2">
+                      {(item.megaMenu === 'citizenship' ? citizenshipMenuItems : legalMenuItems).map((subItem) => (
+                        <div
+                          key={subItem.name}
+                          className="text-gray-600 text-sm cursor-default"
+                        >
+                          {subItem.name}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           </div>

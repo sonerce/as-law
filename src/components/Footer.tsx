@@ -1,22 +1,22 @@
 export default function Footer() {
   const offices = [
     {
-      city: 'İSTANBUL',
-      address: 'Örnek Mahallesi, Örnek Sokak No:1',
+      city: 'İstanbul',
+      address: 'Flora Residence, Küçükbakkalköy Mah. Vedat Günyol Cad. Defne Sok. No: 1 K: 13 D: 1305 Ataşehir - İstanbul',
       email: 'istanbul@aslaw.com',
       phone: '+90 212 XXX XX XX',
     },
     {
-      city: 'LİZBON',
-      address: 'Sample Street No:1',
-      email: 'lisbon@aslaw.com',
-      phone: '+351 XXX XXX XXX',
-    },
-    {
-      city: 'LONDON',
-      address: 'Sample Road No:1',
+      city: 'Londra',
+      address: '6 Falkirk Court, 141 Asfield Road, London N147PF',
       email: 'london@aslaw.com',
       phone: '+44 XXX XXX XXXX',
+    },
+    {
+      city: 'Lizbon',
+      address: 'Avenida 5 de Outubro 102 R/C, 1050-051 Lisboa',
+      email: 'lisbon@aslaw.com',
+      phone: '+351 XXX XXX XXX',
     },
   ]
 

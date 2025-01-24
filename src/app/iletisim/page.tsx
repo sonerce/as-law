@@ -2,31 +2,95 @@
 
 import { motion } from 'framer-motion'
 import ContactForm from '@/components/ContactForm'
+import { useState } from 'react'
 
 const offices = [
   {
     city: 'İstanbul',
-    address: 'Levent Mah. Büyükdere Cad. No:201 Kat:12, 34394 Şişli/İstanbul',
+    address: 'Flora Residence, Küçükbakkalköy Mah. Vedat Günyol Cad. Defne Sok. No: 1 K: 13 D: 1305 Ataşehir - İstanbul',
     phone: '+90 (212) 555 0000',
     email: 'istanbul@aslaw.com.tr',
-    coordinates: {
-      lat: 41.0825918,
-      lng: 29.0178392
-    }
+    mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3011.6555127743256!2d29.115899776537752!3d40.98931897134391!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac7c7c7c7c7c7%3A0x7c7c7c7c7c7c7c7c!2sFlora%20Residence!5e0!3m2!1str!2str!4v1620000000000!5m2!1str!2str'
+  },
+  {
+    city: 'Londra',
+    address: '6 Falkirk Court, 141 Asfield Road, London N147PF',
+    phone: '+44 20 8123 4567',
+    email: 'london@aslaw.com.tr',
+    mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.432046577295!2d-0.1277265!3d51.5073509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761b6b8b4b8b8b%3A0x8b8b8b8b8b8b8b8b!2s6%20Falkirk%20Court%2C%20London%20N14%207PF!5e0!3m2!1sen!2suk!4v1620000000000!5m2!1sen!2suk'
   },
   {
     city: 'Lizbon',
-    address: 'Av. da Liberdade 110, 1269-046 Lisboa, Portugal',
+    address: 'Avenida 5 de Outubro 102 R/C, 1050-051 Lisboa',
     phone: '+351 21 123 4567',
     email: 'lisbon@aslaw.com.tr',
-  },
-  {
-    city: 'London',
-    address: '100 Liverpool Street, London EC2M 2RH, United Kingdom',
-    phone: '+44 20 8123 4567',
-    email: 'london@aslaw.com.tr',
+    mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3113.2758940766733!2d-9.1513834!3d38.7436266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDQ0JzM3LjEiTiA5wrAwOScwNS4wIlc!5e0!3m2!1spt-PT!2spt!4v1620000000000!5m2!1spt-PT!2spt'
   }
 ]
+
+function OfficeCard({ office, index }: { office: typeof offices[0], index: number }) {
+  const [isFlipped, setIsFlipped] = useState(false)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ 
+        duration: 0.6,
+        delay: index * 0.2,
+        ease: "easeOut"
+      }}
+    >
+      <div 
+        className="relative h-[300px] w-full perspective-1000"
+        onMouseEnter={() => setIsFlipped(true)}
+        onMouseLeave={() => setIsFlipped(false)}
+      >
+        <motion.div
+          className="w-full h-full"
+          initial={false}
+          animate={{ rotateY: isFlipped ? 180 : 0 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          {/* Front */}
+          <div className={`absolute w-full h-full bg-white rounded-xl shadow-lg p-6 backface-hidden
+            ${isFlipped ? 'opacity-0' : 'opacity-100'}`}>
+            <h3 className="text-2xl font-semibold text-primary mb-4">{office.city}</h3>
+            <div className="space-y-3">
+              <p className="text-gray-600">{office.address}</p>
+              <p className="text-gray-600">
+                <a href={`tel:${office.phone}`} className="hover:text-primary transition-colors">
+                  {office.phone}
+                </a>
+              </p>
+              <p className="text-gray-600">
+                <a href={`mailto:${office.email}`} className="hover:text-primary transition-colors">
+                  {office.email}
+                </a>
+              </p>
+            </div>
+          </div>
+
+          {/* Back */}
+          <div className={`absolute w-full h-full bg-white rounded-xl shadow-lg overflow-hidden backface-hidden
+            ${isFlipped ? 'opacity-100' : 'opacity-0'}`}
+            style={{ transform: 'rotateY(180deg)' }}>
+            <iframe
+              src={office.mapUrl}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  )
+}
 
 export default function ContactPage() {
   return (
@@ -50,51 +114,8 @@ export default function ContactPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {offices.map((office, index) => (
-              <motion.div
-                key={office.city}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow"
-              >
-                <div className="text-primary text-2xl font-bold mb-4">{office.city}</div>
-                <div className="space-y-4">
-                  <div>
-                    <div className="text-sm text-gray-500 mb-1">Adres</div>
-                    <div className="text-gray-700">{office.address}</div>
-                  </div>
-                  <div>
-                    <div className="text-sm text-gray-500 mb-1">Telefon</div>
-                    <a href={`tel:${office.phone}`} className="text-gray-700 hover:text-primary transition-colors">
-                      {office.phone}
-                    </a>
-                  </div>
-                  <div>
-                    <div className="text-sm text-gray-500 mb-1">E-posta</div>
-                    <a href={`mailto:${office.email}`} className="text-gray-700 hover:text-primary transition-colors">
-                      {office.email}
-                    </a>
-                  </div>
-                </div>
-              </motion.div>
+              <OfficeCard key={office.city} office={office} index={index} />
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Harita */}
-      <section className="mb-20">
-        <div className="container mx-auto px-4">
-          <div className="h-[400px] rounded-xl overflow-hidden shadow-lg">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3007.0071816649713!2d29.015650615415726!3d41.08259177929264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab63f6f4a2867%3A0x2b7c91e2e3b98c03!2sLevent%2C%20B%C3%BCy%C3%BCkdere%20Cd.%20No%3A201%2C%2034394%20%C5%9Ei%C5%9Fli%2F%C4%B0stanbul!5e0!3m2!1str!2str!4v1629789456789!5m2!1str!2str"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
           </div>
         </div>
       </section>
