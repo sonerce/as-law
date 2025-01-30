@@ -18,7 +18,7 @@ export default function TeamMember({ name, title, image, description }: TeamMemb
       transition={{ duration: 0.5 }}
       className="flex flex-col items-center group"
     >
-      <div className="relative w-48 h-48 mb-6 rounded-full overflow-hidden transition-transform duration-300 group-hover:scale-105">
+      <div className="relative w-48 h-48 mb-6 rounded-full overflow-hidden shadow-lg dark:shadow-primary-light/10 transition-all duration-300 group-hover:scale-105">
         <Image
           src={image}
           alt={name}
@@ -26,9 +26,9 @@ export default function TeamMember({ name, title, image, description }: TeamMemb
           className="object-cover"
         />
       </div>
-      <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">{name}</h3>
-      <p className="text-gray-500 mb-4 text-center">{title}</p>
-      <p className="text-gray-600 text-center text-sm">{description}</p>
+      <h3 className="text-xl font-bold text-text-dark dark:text-text-light mb-2 text-center transition-colors duration-200">{name}</h3>
+      <p className="text-text-gray dark:text-text-light/90 mb-4 text-center transition-colors duration-200">{title}</p>
+      <p className="text-text-gray dark:text-text-light/80 text-center text-sm transition-colors duration-200">{description}</p>
     </motion.div>
   )
 }

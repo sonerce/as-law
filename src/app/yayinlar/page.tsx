@@ -66,7 +66,7 @@ export default function PublicationsPage() {
           transition={{ duration: 0.5 }}
           className="max-w-7xl mx-auto"
         >
-          <h1 className="text-4xl md:text-5xl font-raleway font-bold mb-12 text-gray-900 text-center">
+          <h1 className="text-4xl md:text-5xl font-raleway font-bold mb-12 text-text-dark dark:text-text-light text-center">
             Yayınlar
           </h1>
 
@@ -77,7 +77,7 @@ export default function PublicationsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
+                className="bg-background-light dark:bg-background-secondary-dark rounded-lg shadow-md dark:shadow-primary-light/10 p-6 hover:shadow-lg transition-all"
               >
                 <a 
                   href={pub.link} 
@@ -94,10 +94,10 @@ export default function PublicationsPage() {
                     />
                   </div>
                   <div className="text-center">
-                    <h2 className="text-lg font-medium text-gray-900 group-hover:text-primary transition-colors">
+                    <h2 className="text-lg font-medium text-text-dark dark:text-text-light group-hover:text-primary transition-colors">
                       {pub.title}
                     </h2>
-                    <p className="text-sm text-gray-500 mt-2">
+                    <p className="text-sm text-text-gray dark:text-text-light/70 mt-2">
                       {new Date(pub.date).toLocaleDateString('tr-TR', {
                         year: 'numeric',
                         month: 'long',

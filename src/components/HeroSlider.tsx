@@ -31,7 +31,7 @@ export default function HeroSlider() {
   ]
 
   return (
-    <div className="relative h-[600px] w-full">
+    <div className="relative h-[600px] w-full bg-background-light dark:bg-background-dark">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         navigation
@@ -51,17 +51,14 @@ export default function HeroSlider() {
                 className="object-cover"
                 priority
               />
-              <div className="absolute inset-0 z-20 flex items-center justify-center text-center">
-                <div className="container mx-auto px-4">
-                  <h1 className="text-4xl md:text-6xl font-raleway font-bold text-white mb-4">
+              <div className="absolute inset-0 z-20 flex items-center justify-center">
+                <div className="text-center space-y-4 px-4">
+                  <h2 className="text-4xl md:text-5xl font-bold text-text-light">
                     {slide.title}
-                  </h1>
-                  <p className="text-xl md:text-2xl text-text-light mb-8">
+                  </h2>
+                  <p className="text-xl md:text-2xl text-text-light/90">
                     {slide.description}
                   </p>
-                  <button className="btn-primary text-lg">
-                    Daha Fazla Bilgi
-                  </button>
                 </div>
               </div>
             </div>

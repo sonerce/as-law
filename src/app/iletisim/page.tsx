@@ -104,10 +104,10 @@ export default function ContactPage() {
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
           >
-            <h1 className="text-4xl md:text-5xl font-raleway font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl md:text-5xl font-raleway font-bold text-text-dark dark:text-text-light mb-4">
               Global Ofislerimiz
             </h1>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="text-text-gray dark:text-text-light/80 max-w-2xl mx-auto">
               Dünyanın farklı noktalarındaki ofislerimizle müvekkillerimize uluslararası hukuk hizmeti sunuyoruz.
             </p>
           </motion.div>
@@ -130,10 +130,10 @@ export default function ContactPage() {
               transition={{ duration: 0.5 }}
               className="lg:pr-12"
             >
-              <h2 className="text-3xl md:text-4xl font-raleway font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl md:text-4xl font-raleway font-bold text-text-dark dark:text-text-light mb-4">
                 Bizimle İletişime Geçin
               </h2>
-              <p className="text-gray-600 mb-6">
+              <p className="text-text-gray dark:text-text-light/80 mb-6">
                 Hukuki danışmanlık hizmetlerimiz hakkında detaylı bilgi almak, randevu oluşturmak veya sorularınız için bize ulaşın. En kısa sürede size dönüş yapacağız.
               </p>
               <div className="bg-gray-50 rounded-lg p-6">
