@@ -40,31 +40,31 @@ function OfficeCard({ office, index }: { office: typeof offices[0], index: numbe
         delay: index * 0.2,
         ease: "easeOut"
       }}
+      className="h-[300px]"
     >
       <div 
-        className="relative h-[300px] w-full perspective-1000"
+        className="relative w-full h-full cursor-pointer [perspective:1000px]"
         onMouseEnter={() => setIsFlipped(true)}
         onMouseLeave={() => setIsFlipped(false)}
       >
         <motion.div
-          className="w-full h-full"
-          initial={false}
+          className="relative w-full h-full [transform-style:preserve-3d] transition-transform duration-500"
           animate={{ rotateY: isFlipped ? 180 : 0 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
           style={{ transformStyle: "preserve-3d" }}
         >
           {/* Front */}
-          <div className={`absolute w-full h-full bg-white rounded-xl shadow-lg p-6 backface-hidden
-            ${isFlipped ? 'opacity-0' : 'opacity-100'}`}>
+          <div 
+            className="absolute inset-0 w-full h-full bg-white dark:bg-white rounded-xl shadow-[0_4px_20px_-2px_rgba(0,0,0,0.2)] dark:shadow-primary-light/10 p-6 [backface-visibility:hidden]"
+          >
             <h3 className="text-2xl font-semibold text-primary mb-4">{office.city}</h3>
             <div className="space-y-3">
-              <p className="text-gray-600">{office.address}</p>
-              <p className="text-gray-600">
+              <p className="text-text-gray dark:text-text-dark">{office.address}</p>
+              <p className="text-text-gray dark:text-text-dark">
                 <a href={`tel:${office.phone}`} className="hover:text-primary transition-colors">
                   {office.phone}
                 </a>
               </p>
-              <p className="text-gray-600">
+              <p className="text-text-gray dark:text-text-dark">
                 <a href={`mailto:${office.email}`} className="hover:text-primary transition-colors">
                   {office.email}
                 </a>
@@ -73,9 +73,9 @@ function OfficeCard({ office, index }: { office: typeof offices[0], index: numbe
           </div>
 
           {/* Back */}
-          <div className={`absolute w-full h-full bg-white rounded-xl shadow-lg overflow-hidden backface-hidden
-            ${isFlipped ? 'opacity-100' : 'opacity-0'}`}
-            style={{ transform: 'rotateY(180deg)' }}>
+          <div 
+            className="absolute inset-0 w-full h-full bg-white dark:bg-white rounded-xl shadow-[0_4px_20px_-2px_rgba(0,0,0,0.2)] dark:shadow-primary-light/10 overflow-hidden [backface-visibility:hidden] [transform:rotateY(180deg)]"
+          >
             <iframe
               src={office.mapUrl}
               width="100%"
